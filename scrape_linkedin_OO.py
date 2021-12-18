@@ -1,6 +1,6 @@
 # == BROWSER MODULES ==
 from selenium import webdriver # selenium is a module that allows you to automate web browsing
-from selenium.webdriver.common.by import By
+from selenium.webdriver.common.by import By 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException, ElementNotVisibleException
@@ -27,7 +27,6 @@ class scraping_linkedin:
     self.chrome_profile_path = chrome_profile_path
     self.options = self.open_webdriver()
     self.driver = webdriver.Chrome(ChromeDriverManager().install(),options=self.options)
-
 
   def open_webdriver(self):
     self.options = webdriver.ChromeOptions() 
@@ -113,6 +112,8 @@ class scraping_linkedin:
     # Plot the data
     df.plot(x='date_post_company', y=['likes', 'comments', 'share', 'click'], kind='line', figsize=(15,10),)
     plt.show()
+
+    
     
     return df
 
@@ -163,10 +164,10 @@ def main():
     print('== LIKEDIN LOGIN ==')
     username = str(input('Email or phone: '))
     password = str(getpass.getpass('Password: ', stream=None))
-
+    chrome_profile_path = str(input('Caminho do perfil do Chrome: '))
     try:
         bruno = scraping_linkedin(username=username, password=password
-        ,chrome_profile_path='put your chrome user path here')
+        ,chrome_profile_path=chrome_profile_path)
         bruno.login()
         bruno.get_company_posts_data()
         bruno.plot_statistics()
